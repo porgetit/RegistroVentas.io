@@ -94,7 +94,7 @@ function cargarRegistrosDesdeJSON() {
         return registrosString ? JSON.parse(registrosString) : [];
     } catch (error) {
         console.error('Error al cargar registros desde JSON:', error);
-        return null;
+        return [];
     }
 }
 
@@ -131,36 +131,30 @@ function actualizarTotalVentas() {
     document.getElementById('totalVentas').textContent = `$${totalVentas.toFixed(2)}`;
 }
 
-// // Función para exportar registros en formato JSON
-// function exportarRegistros() {
-// // Obtener datos del localStorage
-// const datosLocalStorage = localStorage.getItem('registros');
+// Función para exportar registros en formato JSON
+function exportarRegistros() {
+    // Obtener datos del localStorage
+    const datosLocalStorage = localStorage.getItem('registros');
 
-// // Verificar si hay datos
-// if (datosLocalStorage) {
-//     // Convertir datos a JSON
-//     const datosJSON = JSON.stringify(JSON.parse(datosLocalStorage), null, 2);
+    // Verificar si hay datos
+    if (datosLocalStorage) {
+        // Convertir datos a JSON
+        const datosJSON = JSON.stringify(JSON.parse(datosLocalStorage), null, 2);
 
-//     // Crear un enlace de descarga
-//     const enlaceDescarga = document.createElement('a');
-//     enlaceDescarga.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(datosJSON);
-//     enlaceDescarga.download = 'registros.json';
+        // Crear un enlace de descarga
+        const enlaceDescarga = document.createElement('a');
+        enlaceDescarga.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(datosJSON);
+        enlaceDescarga.download = 'registros.json';
 
-//     // Agregar el enlace al DOM
-//     document.body.appendChild(enlaceDescarga);
+        // Agregar el enlace al DOM
+        document.body.appendChild(enlaceDescarga);
 
-//     // Simular un clic en el enlace para iniciar la descarga
-//     enlaceDescarga.click();
+        // Simular un clic en el enlace para iniciar la descarga
+        enlaceDescarga.click();
 
-//     // Eliminar el enlace después de la descarga
-//     document.body.removeChild(enlaceDescarga);
-// } else {
-//     console.error('No hay datos en el localStorage para exportar.');
-// }
-// }
-
-// // Agregar un botón para iniciar la exportación
-// const botonExportar = document.createElement('button');
-// botonExportar.textContent = 'Exportar Registros';
-// botonExportar.addEventListener('click', exportarRegistros);
-// document.body.appendChild(botonExportar);
+        // Eliminar el enlace después de la descarga
+        document.body.removeChild(enlaceDescarga);
+    } else {
+        console.error('No hay datos en el localStorage para exportar.');
+    }
+}
